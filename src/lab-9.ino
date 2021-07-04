@@ -15,7 +15,7 @@ const uint16_t tempInput = A1;
 const uint16_t blue = D7;
 const uint16_t green = D6;
 const uint16_t orange = D5;
-const uint16_t buzzer = D4;
+const uint16_t blynkLight = A2;
 
 uint minSetPoint = 0;
 uint maxSetPoint = 0;
@@ -47,7 +47,7 @@ void setup()
   pinMode(blue, OUTPUT);
   pinMode(green, OUTPUT);
   pinMode(orange, OUTPUT);
-  pinMode(buzzer, OUTPUT);
+  pinMode(blynkLight, OUTPUT);
 }
 
 void loop()
@@ -107,12 +107,12 @@ void loop()
     display.setCursor(0, 16);
     display.println("Fahrenheit: " + String(tempF));
     display.display();
+  }
 
-    if (display.pressedA()) // if A button pressed, go back to temperature point setting mode
-    {
-      setPointMode = true;
-      setMin = true;
-    }
+  if (display.pressedA()) // if A button pressed, go back to temperature point setting mode
+  {
+    setPointMode = true;
+    setMin = true;
   }
 
   previousTransition = TransitionAcrossPoints;
@@ -161,10 +161,10 @@ BLYNK_WRITE(V1)
   int pinData = param.asInt();
   if (pinData == 1)
   {
-    digitalWrite(buzzer, HIGH);
+    digitalWrite(blynkLight, HIGH);
   }
   else
   {
-    digitalWrite(buzzer, LOW);
+    digitalWrite(blynkLight, LOW);
   }
 }
